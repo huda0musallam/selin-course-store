@@ -27,7 +27,7 @@ Preserve Selin's brand identity, product data, images, colors, and visual design
 7. Reuse existing functions and avoid duplicated logic.
 8. Explain every new file and function in simple language.
 9. Do not change anything unrelated to the requested task.
-10. Products must be rendered dynamically from `src/products.js`. Never hardcode product cards in HTML.
+10. Products must be rendered dynamically from `src/data/products.js`. Never hardcode product cards in HTML.
 11. Organize JavaScript into modules, with one clear responsibility per file.
 12. Only `src/dom.js` can directly access or modify the DOM.
 13. Search, category filtering, and sorting must work together correctly.

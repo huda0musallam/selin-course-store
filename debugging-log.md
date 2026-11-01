@@ -1,33 +1,59 @@
 # Debugging Log — Selin Baby Store
 
-Each entry records what was wrong, why it happened, and how it was fixed.
+Each entry records what was wrong, why it happened, how it was discovered, and how it was fixed.
 
-## 2026-10-31 — Found while building the product display and Cart page
+## 2026-10-31 — Product Display and Cart Development
 
-### 1. Search, category, and sort controls did nothing
-- **Symptom:** Typing in the search box or changing a dropdown did not change the product list.
+### Bug 1: Search, category, and sort controls did nothing
+
+- **What I saw:** Typing in the search box or changing a dropdown did not update the product list.
+- **Type:** Logic
+- **How I found it:** Tested the search, category, and sort controls in the browser.
 - **Cause:** `src/filters.js` had working functions, but nothing listened to the controls or called those functions.
-- **Fix:** `setupFilterEvents()` in `src/dom.js` sends all three values whenever any control changes. `getVisibleProducts()` in `src/pages/home.js` runs search → category → sort, always starting from the original list, so "Default" restores the original order.
+- **Fix:** `setupFilterEvents()` in `src/dom.js` connects all three controls. `getVisibleProducts()` in `src/pages/home.js` applies search → category → sort, starting from the original product list. This also allows Default sorting to restore the original order.
+- **Did I use AI? For what?** Yes. I used AI to understand the event handling and filter integration.
 
-### 2. "Clear cart" button did nothing
-- **Symptom:** Clicking "Clear cart" left the items in the cart.
+### Bug 2: "Clear cart" button did nothing
+
+- **What I saw:** Clicking "Clear cart" left the items in the cart.
+- **Type:** Logic
+- **How I found it:** Clicked the Clear cart button and checked the cart contents.
 - **Cause:** `clearCart()` existed in `src/cart.js`, but no click listener was connected to the button.
-- **Fix:** `setupCartEvents()` now listens to `#clear-cart` and calls `onClear`, which runs `clearCart()` and redraws the page.
+- **Fix:** `setupCartEvents()` in `src/dom.js` listens to `#clear-cart` and calls `onClear`, which runs `clearCart()` and redraws the page.
+- **Did I use AI? For what?** No. I discovered and investigated this issue myself by testing the button and checking its behavior.
 
-### 3. Prices showed without dollars and cents
-- **Symptom:** Product cards showed `34` instead of `$34.00`; cart rows could show `$40` or long decimals.
-- **Cause:** The raw number was put into the HTML without formatting.
-- **Fix:** New `formatPrice()` in `src/format.js` is used for every price.
+### Bug 3: Prices showed without dollars and cents
 
-### 4. Product cards showed the category id ("bath-care") instead of its name
+- **What I saw:** Product cards showed `$34` instead of `$34.00`; cart rows could show `$40` or long decimals.
+- **Type:** Logic
+- **How I found it:** Inspected product prices and cart totals in the browser.
+- **Cause:** Raw numbers were displayed without formatting.
+- **Fix:** Added `formatPrice()` in `src/format.js` and used it wherever prices are displayed.
+- **Did I use AI? For what?** Yes. I used AI to understand number formatting and create a reusable formatting function.
+
+### Bug 4: Product cards showed the category ID instead of its name
+
+- **What I saw:** Product cards displayed "bath-care" instead of the category name.
+- **Type:** Logic
+- **How I found it:** Checked the category labels on product cards.
 - **Cause:** The card used `product.categoryId` directly.
-- **Fix:** New `getCategoryName()` in `src/data/categories.js` looks up the display name.
+- **Fix:** Added `getCategoryName()` in `src/data/categories.js` to look up the display name.
+- **Did I use AI? For what?** Yes. I used AI to understand how to retrieve category display names from the category data.
 
-### 5. The `hidden` attribute could be ignored
-- **Symptom:** An element with `hidden` could still appear if a CSS class gave it `display: grid` or `display: flex`.
-- **Cause:** `[hidden]` and a single class have the same CSS specificity, so the rule written later in the file wins.
-- **Fix:** Changed the rule to `html [hidden]`, which is slightly more specific, without needing `!important`.
+### Bug 5: The `hidden` attribute could be ignored
 
-### 6. Carts saved before product images were added had no images
-- **Cause:** Each cart item was a full copy of the product at the moment it was added, so older saved copies had no `image` field.
-- **Fix:** `loadCart()` now keeps only the `id` and `quantity` from storage and takes the latest details from `products.js`. It also drops ids that no longer exist and recovers from damaged saved data.
+- **What I saw:** An element with the `hidden` attribute could still appear when a CSS class applied `display: grid` or `display: flex`.
+- **Type:** Logic (CSS specificity)
+- **How I found it:** Inspected the element's visibility in the browser and checked the CSS rules.
+- **Cause:** The `[hidden]` selector and a single class selector had the same specificity, so the later CSS rule could override it.
+- **Fix:** Changed the selector to `html [hidden]`, which has higher specificity without using `!important`.
+- **Did I use AI? For what?** No. I investigated the CSS behavior myself, identified the specificity issue, and fixed the selector.
+
+### Bug 6: Old cart items had no product images
+
+- **What I saw:** Cart items saved before product images were added did not display images.
+- **Type:** State
+- **How I found it:** Opened the cart after restoring previously saved cart data.
+- **Cause:** Each cart item was stored as a full copy of the product at the time it was added. Older saved copies did not contain the `image` field.
+- **Fix:** `loadCart()` now keeps only the product `id` and `quantity` from storage and retrieves the latest product details from `products.js`. It also removes IDs that no longer exist and handles damaged saved data.
+- **Did I use AI? For what?** No. I discovered the issue by checking the restored cart data and investigated the cause and fix myself.
