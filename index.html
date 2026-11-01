@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Everything Your Little One Needs — thoughtfully chosen baby clothing and essentials from Selin Baby Store."
+    />
+    <title>Selin Baby Store</title>
+    <link rel="icon" type="image/png" href="/brand/selin-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@600;700;800&display=swap"
+    />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body data-page="home">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <!-- Slim peach announcement bar (same on every page) -->
+    <p class="announcement">Free shipping on orders over $50</p>
+
+    <!-- Shared header (same on every page) -->
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a
+          class="site-header__brand"
+          href="/"
+          aria-label="Selin Kids Store home"
+        >
+          <img
+            src="/brand/selin-logo.png"
+            alt="Selin Kids Store"
+            width="1200"
+            height="720"
+          />
+        </a>
+
+        <nav class="site-nav" aria-label="Main">
+          <ul class="site-nav__list">
+            <li><a class="site-nav__link" href="/#catalog">Shop</a></li>
+            <li><a class="site-nav__link" href="/contact.html">Contact</a></li>
+            <li>
+              <a class="site-nav__link site-nav__link--cart" href="/cart.html">
+                Cart
+                <span class="cart-badge">
+                  <span data-cart-count>0</span>
+                  <span class="visually-hidden"> items</span>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <!-- Intro banner: holds the page's only h1 -->
+      <section class="intro" aria-labelledby="intro-heading">
+        <div class="container intro__inner">
+          <div class="intro__text">
+            <p class="eyebrow">Baby &amp; children's essentials</p>
+            <h1 id="intro-heading" class="intro__title">
+              Everything Your <span class="accent-pink">Little</span>
+              <span class="accent-sage">One</span> Needs
+            </h1>
+            <p class="intro__lead">
+              Soft clothing, gentle care, and thoughtful essentials for every
+              little moment.
+            </p>
+            <div class="intro__actions">
+              <a class="button button--primary" href="#catalog"
+                >Shop the collection</a
+              >
+              <a class="button button--ghost" href="/cart.html"
+                >View your cart</a
+              >
+            </div>
+          </div>
+          <div class="intro__media">
+            <img
+              class="intro__image"
+              src="/images/hero-garden-reference.png"
+              alt="Two smiling children blowing bubbles on the grass in a sunny garden beside a teddy bear"
+              width="1536"
+              height="1024"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Product catalog -->
+      <section id="catalog" class="catalog" aria-labelledby="catalog-heading">
+        <div class="container catalog__inner">
+          <div class="section-heading">
+            <p class="eyebrow">The Selin collection</p>
+            <h2 id="catalog-heading" class="section-title">Our products</h2>
+            <p class="section-heading__lead">
+              Gentle, thoughtfully chosen pieces for everyday comfort.
+            </p>
+          </div>
+
+          <div
+            class="catalog-controls"
+            role="search"
+            aria-label="Filter products"
+          >
+            <div class="field field--search">
+              <label class="field__label" for="search-input"
+                >Search products</label
+              >
+              <input
+                class="field__control"
+                type="search"
+                id="search-input"
+                name="search"
+                placeholder="Search by product name"
+                autocomplete="off"
+              />
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="category-select">Category</label>
+              <select
+                class="field__control"
+                id="category-select"
+                name="category"
+              >
+                <option value="all">All categories</option>
+                <option value="clothing">Baby Clothing</option>
+                <option value="newborn">Newborn Essentials</option>
+                <option value="feeding">Feeding</option>
+                <option value="bath-care">Bath and Care</option>
+                <option value="sleep">Sleep</option>
+                <option value="toys">Toys</option>
+                <option value="accessories">Accessories</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="sort-select"
+                >Sort by price</label
+              >
+              <select class="field__control" id="sort-select" name="sort">
+                <option value="default">Default</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+              </select>
+            </div>
+          </div>
+
+          <p id="results-count" class="catalog__count" aria-live="polite"></p>
+
+          <!-- Product cards are rendered here by JavaScript (src/dom.js) -->
+          <div id="product-grid" class="product-grid"></div>
+
+          <p id="products-empty" class="empty-message" hidden>
+            No products match your search. Try another word or category.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Shared footer (same on every page) -->
+    <footer id="contact" class="site-footer">
+      <div class="container site-footer__inner">
+        <div class="site-footer__brand">
+          <img
+            src="/brand/selin-logo.png"
+            alt="Selin Kids Store"
+            width="1200"
+            height="720"
+          />
+          <p>Thoughtfully chosen essentials for your little one.</p>
+        </div>
+
+        <nav aria-label="Footer">
+          <h2 class="site-footer__heading">Explore</h2>
+          <ul class="site-footer__links">
+            <li><a href="/#catalog">Shop all products</a></li>
+            <li><a href="/cart.html">Your cart</a></li>
+          </ul>
+        </nav>
+
+        <div>
+          <h2 class="site-footer__heading">Contact</h2>
+          <ul class="site-footer__links">
+            <li>
+              <a href="mailto:hello@selin.example">hello@selin.example</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="container site-footer__bottom">
+        &copy; 2026 Selin Kids Store. A training project.
+      </p>
+    </footer>
+
+    <!-- "Added to cart" message, shown briefly by JavaScript -->
+    <p id="cart-toast" class="toast" role="status" aria-live="polite"></p>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

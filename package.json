@@ -1,0 +1,16 @@
+{
+  "name": "selin-baby-store",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "oxlint"
+  },
+  "devDependencies": {
+    "oxlint": "^1.81.0",
+    "vite": "^8.3.0"
+  }
+}

@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Review the items in your Selin Baby Store shopping cart."
+    />
+    <title>Your Cart — Selin Baby Store</title>
+    <link rel="icon" type="image/png" href="/brand/selin-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@600;700;800&display=swap"
+    />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body data-page="cart">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <!-- Slim peach announcement bar (same on every page) -->
+    <p class="announcement">Free shipping on orders over $50</p>
+
+    <!-- Shared header (same on every page) -->
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a class="site-header__brand" href="/" aria-label="Selin Kids Store home">
+          <img
+            src="/brand/selin-logo.png"
+            alt="Selin Kids Store"
+            width="1200"
+            height="720"
+          />
+        </a>
+
+        <nav class="site-nav" aria-label="Main">
+          <ul class="site-nav__list">
+            <li><a class="site-nav__link" href="/#catalog">Shop</a></li>
+            <li><a class="site-nav__link" href="#contact">Contact</a></li>
+            <li>
+              <a
+                class="site-nav__link site-nav__link--cart"
+                href="/cart.html"
+                aria-current="page"
+              >
+                Cart
+                <span class="cart-badge">
+                  <span data-cart-count>0</span>
+                  <span class="visually-hidden"> items</span>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content" class="cart-page">
+      <div class="container">
+        <div class="page-heading">
+          <a class="page-heading__back" href="/#catalog">← Continue shopping</a>
+          <!-- tabindex="-1" lets JavaScript move focus here after removing an item -->
+          <h1 id="cart-heading" class="page-heading__title" tabindex="-1">
+            Your cart
+          </h1>
+          <p class="page-heading__lead">
+            You have <strong id="cart-count">0 items</strong> in your cart.
+          </p>
+        </div>
+
+        <!-- Shown only when the cart is empty -->
+        <section id="cart-empty" class="cart-empty" aria-labelledby="cart-empty-heading" hidden>
+          <h2 id="cart-empty-heading" class="cart-empty__title">
+            Your cart is empty
+          </h2>
+          <p>Find something soft and lovely for your little one.</p>
+          <a class="button button--primary" href="/#catalog">Start shopping</a>
+        </section>
+
+        <!-- Shown only when the cart has items -->
+        <div id="cart-content" class="cart-layout">
+          <section class="cart-items" aria-labelledby="cart-items-heading">
+            <h2 id="cart-items-heading" class="visually-hidden">Items in your cart</h2>
+
+            <!-- Cart rows are rendered here by JavaScript (src/dom.js) -->
+            <ul id="cart-items" class="cart-list"></ul>
+
+            <button type="button" id="clear-cart" class="button button--text cart-items__clear">
+              Clear cart
+            </button>
+          </section>
+
+          <aside class="cart-summary" aria-labelledby="summary-heading">
+            <h2 id="summary-heading" class="cart-summary__title">Order summary</h2>
+
+            <dl class="cart-summary__rows">
+              <div class="cart-summary__row">
+                <dt>Subtotal</dt>
+                <dd id="cart-subtotal">$0.00</dd>
+              </div>
+              <div class="cart-summary__row">
+                <dt>Shipping</dt>
+                <dd id="cart-shipping">Calculated at checkout</dd>
+              </div>
+              <div class="cart-summary__row cart-summary__row--total">
+                <dt>Total</dt>
+                <dd id="cart-total">$0.00</dd>
+              </div>
+            </dl>
+
+            <div class="shipping-meter">
+              <p id="shipping-message" class="shipping-meter__text" aria-live="polite"></p>
+              <div class="shipping-meter__track" aria-hidden="true">
+                <div id="shipping-progress" class="shipping-meter__bar"></div>
+              </div>
+            </div>
+
+            <a class="button button--secondary cart-summary__continue" href="/#catalog">
+              Continue shopping
+            </a>
+          </aside>
+        </div>
+      </div>
+    </main>
+
+    <!-- Shared footer (same on every page) -->
+    <footer id="contact" class="site-footer">
+      <div class="container site-footer__inner">
+        <div class="site-footer__brand">
+          <img
+            src="/brand/selin-logo.png"
+            alt="Selin Kids Store"
+            width="1200"
+            height="720"
+          />
+          <p>Thoughtfully chosen essentials for your little one.</p>
+        </div>
+
+        <nav aria-label="Footer">
+          <h2 class="site-footer__heading">Explore</h2>
+          <ul class="site-footer__links">
+            <li><a href="/#catalog">Shop all products</a></li>
+            <li><a href="/cart.html">Your cart</a></li>
+          </ul>
+        </nav>
+
+        <div>
+          <h2 class="site-footer__heading">Contact</h2>
+          <ul class="site-footer__links">
+            <li>
+              <a href="mailto:hello@selin.example">hello@selin.example</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="container site-footer__bottom">
+        &copy; 2026 Selin Kids Store. A training project.
+      </p>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
