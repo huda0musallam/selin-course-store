@@ -3,10 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Review the items in your Selin Baby Store shopping cart."
-    />
+    <meta name="description" content="Review the items in your Selin Baby Store shopping cart." />
     <title>Your Cart — Selin Baby Store</title>
     <link rel="icon" type="image/png" href="/brand/selin-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -21,50 +18,78 @@
     <a class="skip-link" href="#main-content">Skip to main content</a>
 
     <!-- Slim peach announcement bar (same on every page) -->
-    <p class="announcement">Free shipping on orders over $50</p>
+    <div class="announcement">
+      <span class="announcement__message"
+        >♧ &nbsp; Free shipping on orders over $75 &nbsp;·&nbsp; Easy 30-day returns</span
+      ><span class="announcement__links"
+        ><span>English⌄</span><span>Help</span><span>Track Order</span></span
+      >
+    </div>
 
     <!-- Shared header (same on every page) -->
     <header class="site-header">
       <div class="container site-header__inner">
         <a class="site-header__brand" href="/" aria-label="Selin Kids Store home">
-          <img
-            src="/brand/selin-logo.png"
-            alt="Selin Kids Store"
-            width="1200"
-            height="720"
-          />
+          <img src="/brand/selin-logo.png" alt="Selin Kids Store" width="1200" height="720" />
         </a>
 
-        <nav class="site-nav" aria-label="Main">
+        <a class="header-search" href="/#catalog"
+          ><svg class="header-search__icon" aria-hidden="true" viewBox="0 0 24 24">
+            <circle cx="10.8" cy="10.8" r="6.8" />
+            <path d="m16 16 4.5 4.5" /></svg
+          ><span>Search for baby essentials</span
+          ><span class="header-search__button" aria-hidden="true"
+            ><svg viewBox="0 0 24 24">
+              <circle cx="10.8" cy="10.8" r="6.8" />
+              <path d="m16 16 4.5 4.5" /></svg></span
+        ></a>
+        <nav class="site-nav site-nav--actions" aria-label="Store links">
           <ul class="site-nav__list">
-            <li><a class="site-nav__link" href="/#catalog">Shop</a></li>
-            <li><a class="site-nav__link" href="#contact">Contact</a></li>
             <li>
-              <a
-                class="site-nav__link site-nav__link--cart"
-                href="/cart.html"
-                aria-current="page"
+              <a class="site-nav__link" href="/contact.html"
+                ><svg aria-hidden="true" viewBox="0 0 24 24">
+                  <circle cx="12" cy="8" r="3.5" />
+                  <path d="M5 20c.6-3.5 3.1-5.5 7-5.5s6.4 2 7 5.5" /></svg
+                ><small>Account</small></a
               >
-                Cart
-                <span class="cart-badge">
-                  <span data-cart-count>0</span>
-                  <span class="visually-hidden"> items</span>
-                </span>
-              </a>
+            </li>
+            <li>
+              <a class="site-nav__link" href="/#catalog"
+                ><svg aria-hidden="true" viewBox="0 0 24 24">
+                  <path
+                    d="M20.8 8.8c0 5-8.8 10.2-8.8 10.2S3.2 13.8 3.2 8.8A4.7 4.7 0 0 1 12 6.2a4.7 4.7 0 0 1 8.8 2.6Z"
+                  /></svg
+                ><small>Wishlist</small></a
+              >
+            </li>
+            <li>
+              <a class="site-nav__link site-nav__link--cart" href="/cart.html" aria-current="page"
+                ><svg aria-hidden="true" viewBox="0 0 24 24">
+                  <path d="M5 8h14l-.8 11.2a2 2 0 0 1-2 1.8H7.8a2 2 0 0 1-2-1.8L5 8Z" />
+                  <path d="M9 9V6a3 3 0 0 1 6 0v3" /></svg
+                ><small>Bag</small
+                ><span class="cart-badge"
+                  ><span data-cart-count>0</span><span class="visually-hidden"> items</span></span
+                ></a
+              >
             </li>
           </ul>
         </nav>
       </div>
     </header>
+    <nav class="category-nav" aria-label="Shop categories">
+      <a href="/#catalog">♧ Shop All</a><a href="/#catalog">♧ Clothing</a
+      ><a href="/#catalog">☻ Newborn</a><a href="/#catalog">♧ Feeding</a
+      ><a href="/#catalog">♧ Bath &amp; Care</a><a href="/#catalog">☾ Sleep</a
+      ><a href="/#catalog">▦ Toys</a><a href="/#catalog">✧ Accessories</a>
+    </nav>
 
     <main id="main-content" class="cart-page">
       <div class="container">
         <div class="page-heading">
           <a class="page-heading__back" href="/#catalog">← Continue shopping</a>
           <!-- tabindex="-1" lets JavaScript move focus here after removing an item -->
-          <h1 id="cart-heading" class="page-heading__title" tabindex="-1">
-            Your cart
-          </h1>
+          <h1 id="cart-heading" class="page-heading__title" tabindex="-1">Your cart</h1>
           <p class="page-heading__lead">
             You have <strong id="cart-count">0 items</strong> in your cart.
           </p>
@@ -72,9 +97,7 @@
 
         <!-- Shown only when the cart is empty -->
         <section id="cart-empty" class="cart-empty" aria-labelledby="cart-empty-heading" hidden>
-          <h2 id="cart-empty-heading" class="cart-empty__title">
-            Your cart is empty
-          </h2>
+          <h2 id="cart-empty-heading" class="cart-empty__title">Your cart is empty</h2>
           <p>Find something soft and lovely for your little one.</p>
           <a class="button button--primary" href="/#catalog">Start shopping</a>
         </section>
@@ -84,7 +107,7 @@
           <section class="cart-items" aria-labelledby="cart-items-heading">
             <h2 id="cart-items-heading" class="visually-hidden">Items in your cart</h2>
 
-            <!-- Cart rows are rendered here by JavaScript (src/dom.js) -->
+            <!-- Cart rows are rendered here by JavaScript (src/dom.ts) -->
             <ul id="cart-items" class="cart-list"></ul>
 
             <button type="button" id="clear-cart" class="button button--text cart-items__clear">
@@ -129,12 +152,7 @@
     <footer id="contact" class="site-footer">
       <div class="container site-footer__inner">
         <div class="site-footer__brand">
-          <img
-            src="/brand/selin-logo.png"
-            alt="Selin Kids Store"
-            width="1200"
-            height="720"
-          />
+          <img src="/brand/selin-logo.png" alt="Selin Kids Store" width="1200" height="720" />
           <p>Thoughtfully chosen essentials for your little one.</p>
         </div>
 
@@ -156,11 +174,9 @@
         </div>
       </div>
 
-      <p class="container site-footer__bottom">
-        &copy; 2026 Selin Kids Store. A training project.
-      </p>
+      <p class="container site-footer__bottom">&copy; 2026 Selin Kids Store. A training project.</p>
     </footer>
 
-    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

@@ -1,11 +1,12 @@
-import { products } from "./data/products.js";
+import type { Product } from '../products/products.types.ts';
+import type { Cart, SavedCartItem } from './cart.types.ts';
+import { products } from '../products/products.ts';
 
-// Orders at or above this amount ship free (matches the announcement bar).
 export const FREE_SHIPPING_THRESHOLD = 50;
 
-export let cart = [];
+export let cart: Cart = [];
 
-export function addToCart(product) {
+export function addToCart(product: Product) {
   const existingProduct = cart.find((item) => {
     return item.id === product.id;
   });
@@ -21,7 +22,7 @@ export function addToCart(product) {
   saveCart();
 }
 
-export function decreaseQuantity(productId) {
+export function decreaseQuantity(productId: string) {
   const existingProduct = cart.find((item) => {
     return item.id === productId;
   });
@@ -35,7 +36,7 @@ export function decreaseQuantity(productId) {
   saveCart();
 }
 
-export function removeFromCart(productId) {
+export function removeFromCart(productId: string) {
   cart = cart.filter((item) => item.id !== productId);
   saveCart();
 }
@@ -48,46 +49,52 @@ export function getCartCount() {
   return cart.reduce((total, item) => {
     return total + item.quantity;
   }, 0);
-  
 }
 
 export function getCartTotal() {
   return cart.reduce((total, item) => {
     return total + item.price * item.quantity;
   }, 0);
- 
 }
 
 export function saveCart() {
-  localStorage.setItem("selin-cart", JSON.stringify(cart));
+  localStorage.setItem('selin-cart', JSON.stringify(cart));
 }
-// Restores the saved cart. Only the id and quantity are trusted from storage;
-// name, price, and image always come fresh from products.js, so an old saved
-// cart still shows today's details (and items no longer sold are dropped).
+
 export function loadCart() {
-  const savedCart = localStorage.getItem("selin-cart");
+  const savedCart = localStorage.getItem('selin-cart');
   if (!savedCart) return;
 
   try {
-    cart = JSON.parse(savedCart)
-      .map((savedItem) => {
+    const parsedCart: unknown = JSON.parse(savedCart);
+
+    if (!Array.isArray(parsedCart)) {
+      cart = [];
+      return;
+    }
+
+    cart = parsedCart
+      .map((savedItem: SavedCartItem) => {
         const product = products.find((item) => item.id === savedItem.id);
+
         if (!product) return null;
-        return { ...product, quantity: savedItem.quantity };
+
+        return {
+          ...product,
+          quantity: savedItem.quantity,
+        };
       })
       .filter((item) => item !== null);
   } catch {
-    // Saved data was damaged: start with an empty cart instead of crashing.
     cart = [];
   }
 }
 
-// How much more the shopper must spend to get free shipping (0 if they qualify).
 export function getAmountUntilFreeShipping() {
   return Math.max(FREE_SHIPPING_THRESHOLD - getCartTotal(), 0);
 }
 
-export function increaseQuantity(productId) {
+export function increaseQuantity(productId: string) {
   const existingProduct = cart.find((item) => {
     return item.id === productId;
   });
